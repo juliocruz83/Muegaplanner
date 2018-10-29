@@ -1,0 +1,12 @@
+.edit-component {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-component > * {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+}

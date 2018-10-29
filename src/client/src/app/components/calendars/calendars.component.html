@@ -1,0 +1,108 @@
+<br>
+<h2>Calendars</h2>
+<br>
+
+<ng-template #loading>
+  <div class="text-center">
+    <i class="fa fa-spin fa-spinner fa-5x"></i>
+    <br>
+    Loading...
+  </div>
+</ng-template>
+
+<div *ngIf="userProfile$ | async; else loading; let userProfile">
+  <div *ngIf="calendars$ | async; else loading; let calendars">
+    <table class="table table-sm" style="width: 70%">
+      <thead>
+        <th class="text-center">Actions</th>
+        <th>Name</th>
+        <th class="text-center">Subscribe</th>
+        <th class="text-center">Color</th>
+        <th class="text-center">Default</th>
+      </thead>
+      <tbody *ngFor="let calendar of calendars">
+        <tr>
+          <ng-container *ngIf="editId != calendar._id; else elseTemplate">
+            <!-- View Mode -->
+            <td class="text-center">
+              <button class="btn btn-sm btn-light" (click)="showEdit(calendar._id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              &nbsp;
+              <button class="btn btn-sm btn-light" (click)="delete(calendar._id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+            <td>
+              <h5>{{calendar.name}}</h5>
+            </td>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <!-- Edit Mode -->
+            <td class="text-center">
+              <button class="btn btn-light" (click)="cancelEdit()">Cancel</button>
+              &nbsp;
+              <button class="btn btn-success" (click)="saveEdit(calendar)">Save</button>
+            </td>
+            <td>
+              <mat-form-field>
+                <input matInput [(ngModel)]="calendar.name" name="name" required>
+              </mat-form-field>
+            </td>
+          </ng-template>
+          <td class="text-center">
+              <mat-checkbox color="warn" 
+              [checked]="isSubscribedToCalendar(userProfile, calendar.name)"
+              (change)="onSubscribeCheckChanged($event, userProfile, calendar)"></mat-checkbox>
+          </td>
+          <td class="text-center">
+            <button mat-fab 
+              style="width: 30px; height: 30px;"
+              *ngIf="isSubscribedToCalendar(userProfile, calendar.name)"
+              (colorPicker)="getCalendarsColor(userProfile, calendar)" 
+              [style.background]="getCalendarsColor(userProfile, calendar)" 
+              (colorPickerChange)="onCalendarColorChanged($event, userProfile, calendar)">
+            </button>
+          </td>
+          <td class="text-center">
+              <mat-radio-button value="1" 
+                [checked]="isDefault(userProfile, calendar.name)"
+                [disabled]="!isSubscribedToCalendar(userProfile, calendar.name)"
+                (change)="onDefaultChanged($event, userProfile, calendar)">
+              </mat-radio-button>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<br>
+<div [hidden]="newCalendarVisible">
+  <button mat-stroked-button color="primary" (click)="showNewCalendarCtrls()">Add Calendar</button>
+</div>
+
+<div [hidden]="!newCalendarVisible">
+    <form>
+      <div class="row">
+        <div class="col-md-2">
+          <mat-form-field>
+            <input matInput [(ngModel)]="newCalendar.name" name="name" placeholder="Name" required>
+          </mat-form-field>
+        </div>
+        <div class="col-md-1">
+          <span>
+            <mat-placeholder>Color</mat-placeholder>
+            <button  mat-fab 
+              style="width: 30px; height: 30px;"
+              [(colorPicker)]="newCalendar.color" 
+              [style.background]="newCalendar.color"></button>            
+          </span>
+        </div>        
+      </div>
+      <div class="button-row">
+        <button mat-flat-button color="primary" (click)="saveClick()">Save</button>
+        <a mat-button (click)="cancelClick()">Cancel</a>
+      </div>
+    </form>
+</div>

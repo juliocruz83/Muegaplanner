@@ -1,0 +1,38 @@
+<h2>{{ event._id != null ? 'Edit' : 'Add'}} Event</h2>
+<hr/>
+<form>
+  <div class="edit-component">
+    <mat-form-field>
+      <input matInput [(ngModel)]="event.name" name="name" placeholder="Title" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Event starts at...</mat-placeholder>
+      <mat-datetimepicker-toggle [for]="startDatetimePicker" matSuffix></mat-datetimepicker-toggle>
+      <mat-datetimepicker #startDatetimePicker type="datetime" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+      <input matInput [(ngModel)]="event.startDateTime" name="startDateTime" [matDatetimepicker]="startDatetimePicker" required autocomplete="false">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Event ends at...</mat-placeholder>
+      <mat-datetimepicker-toggle [for]="endDatetimePicker" matSuffix></mat-datetimepicker-toggle>
+      <mat-datetimepicker #endDatetimePicker type="datetime" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+      <input matInput [(ngModel)]="event.endDateTime" name="endDateTime" [matDatetimepicker]="endDatetimePicker" required autocomplete="false">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="event.location" name="location" placeholder="Location">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="event.notes" name="notes" placeholder="Notes"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select [(ngModel)]="event.calendar" name="calendar" placeholder="Calendar" required>
+        <mat-option *ngFor="let calendar of calendars" [value]="calendar.name">
+          {{calendar.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-stroked-button color="primary" (click)="save()">Save</button>
+      <button mat-button color="primary" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

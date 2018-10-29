@@ -1,0 +1,22 @@
+<h2>{{selectedDate | date:'fullDate'}}</h2>
+<div style="overflow-y: scroll; max-height: 70vh;">
+<div *ngFor="let event of events$ | async as events;">
+  <div class="card" [ngStyle]="{'background-color': getColor(event.calendar)}">
+    <div class="card-body">
+      <ul>
+        <li>{{event.name}}</li>
+        <li>{{event.location}}</li>
+        <li>{{event.startDateTime | date:'shortTime'}}</li>
+      </ul>
+    </div>
+    <div class="card-overlay-action">
+        <a class="btn-floating btn-action ml-auto mr-4 mdb-color lighten-3" routerLink="/edit-event/{{event._id}}">
+          <i class="material-icons">edit</i>
+        </a>
+    </div>
+  </div>
+</div>
+</div>
+<div class="button-row" style="margin-top: 18px; text-align: right;">
+  <a mat-fab color="primary" style="text-decoration: none;" routerLink="/edit-event">Add</a>
+</div>
