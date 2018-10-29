@@ -1,0 +1,37 @@
+<br>
+<h2>Subscribers</h2>
+<br>
+
+<div class="row">
+  <div class="col-md-4">
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Calendars</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subscriber of subscribers">
+          <td>{{subscriber.name}}</td>
+          <td>
+            <span *ngFor="let calendar of subscriber.calendars">
+              <button mat-fab 
+                style="width: 30px; height: 30px;"
+                [style.background]="getCalendarColor(calendar)">
+              </button>
+              &nbsp;
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-light" routerLink="/subscribers/{{subscriber.name}}" >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

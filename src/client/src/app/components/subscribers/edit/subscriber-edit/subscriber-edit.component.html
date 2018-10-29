@@ -1,0 +1,29 @@
+<br>
+<h2>Edit Subscriber</h2>
+<br>
+
+<ng-template #loading>
+  <div class="text-center">
+    <i class="fa fa-spin fa-spinner fa-5x"></i>
+    <br>
+    Loading...
+  </div>
+</ng-template>
+
+<div *ngIf="subscriber$ | async; else loading; let subscriber">
+  <form>
+    <mat-form-field>
+      <input matInput [(ngModel)]="subscriber.name" name="name" placeholder="Name" required>
+    </mat-form-field>
+    <div>
+      <div *ngFor="let calendar of calendars" style="vertical-align: middle">
+        <button mat-fab 
+          style="width: 30px; height: 30px;"
+          [style.background]="calendar.color">
+        </button>        
+        &nbsp;
+        <mat-checkbox color="warn" [checked]="subscriber.calendars.includes(calendar.name)">{{calendar.name}}</mat-checkbox>
+      </div>
+    </div>
+  </form>
+</div>
