@@ -436,14 +436,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-// import { SubscriberEditComponent } from './components/subscribers/edit/subscriber-edit/subscriber-edit.component';
-// import { SubscriberEditCalendarsComponent } from
-// './components/subscribers/edit/subscriber-edit-calendars/subscriber-edit-calendars.component';
 
 
 var routes = [
-    // { path: 'subscribers', component: SubscribersComponent },
-    // { path: 'subscribers/:name', component: SubscriberEditComponent },
     { path: 'login', component: _muega_components_user_login_login_component__WEBPACK_IMPORTED_MODULE_15__["LoginComponent"] },
     { path: 'register', component: _muega_components_user_register_register_component__WEBPACK_IMPORTED_MODULE_16__["RegisterComponent"] },
     { path: 'calendars', component: _muega_components_calendars_calendars_component__WEBPACK_IMPORTED_MODULE_13__["CalendarsComponent"], canActivate: [_muega_services_auth_guard_service__WEBPACK_IMPORTED_MODULE_19__["AuthGuardService"]] },
@@ -466,11 +461,8 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
                 _muega_components_subscribers_subscribers_component__WEBPACK_IMPORTED_MODULE_11__["SubscribersComponent"],
-                // SubscriberEditComponent,
                 _muega_components_calendar_calendar_component__WEBPACK_IMPORTED_MODULE_12__["CalendarComponent"],
                 _muega_components_calendar_calendar_ctrl_calendar_ctrl_component__WEBPACK_IMPORTED_MODULE_18__["CalendarCtrlComponent"],
-                // SubscriberEditComponent,
-                // SubscriberEditCalendarsComponent,
                 _muega_components_user_register_register_component__WEBPACK_IMPORTED_MODULE_16__["RegisterComponent"],
                 _muega_components_user_profile_profile_component__WEBPACK_IMPORTED_MODULE_14__["ProfileComponent"],
                 _muega_components_user_login_login_component__WEBPACK_IMPORTED_MODULE_15__["LoginComponent"],
@@ -484,6 +476,7 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
                 angular_calendar__WEBPACK_IMPORTED_MODULE_5__["CalendarModule"].forRoot(),
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbModule"].forRoot(),
+                _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_6__["NgbAlertModule"].forRoot(),
                 _material_material_module__WEBPACK_IMPORTED_MODULE_7__["MaterialModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__["BrowserAnimationsModule"],
                 ngx_color_picker__WEBPACK_IMPORTED_MODULE_9__["ColorPickerModule"]
@@ -750,7 +743,7 @@ var SelectDateService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "@import \"https://fonts.googleapis.com/icon?family=Material+Icons\";\n\ntd {\n    vertical-align:middle;\n}"
 
 /***/ }),
 
@@ -761,7 +754,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\"\nrel=\"stylesheet\">\n\n<br>\n<h2>Calendars</h2>\n<br>\n\n\n<ng-template #loading>\n  <div class=\"text-center\">\n    <i class=\"fa fa-spin fa-spinner fa-5x\"></i>\n    <br>\n    Loading...\n  </div>\n</ng-template>\n\n<div *ngIf=\"calendars$ | async; else loading; let calendars\">\n  <table class=\"table table-sm\" style=\"width: 70%\">\n    <tbody *ngFor=\"let calendar of calendars\">\n      <ng-container *ngIf=\"editId != calendar._id; else elseTemplate\">\n        <!-- View Mode -->\n        <tr>\n          <td style=\"width: 10%;\">\n            <button mat-fab \n              style=\"width: 30px; height: 30px;\"\n              [style.background]=\"calendar.color\">\n            </button>\n          </td>\n          <td style=\"width: 50%;\">\n            <h5>{{calendar.name}}</h5>\n          </td>\n          <td>\n            <button class=\"btn btn-sm btn-light\" (click)=\"showEdit(calendar._id)\">\n              <mat-icon>edit</mat-icon>\n            </button>\n            &nbsp;\n            <button class=\"btn btn-sm btn-danger\" (click)=\"delete(calendar._id)\">\n              <mat-icon>delete</mat-icon>\n            </button>\n          </td>\n        </tr>\n      </ng-container>\n      <ng-template #elseTemplate>\n        <!-- Edit Mode -->\n        <tr>          \n          <td style=\"width: 10%;\">\n            <button mat-fab \n              style=\"width: 30px; height: 30px;\"\n              [(colorPicker)]=\"calendar.color\" \n              [style.background]=\"calendar.color\">\n            </button>\n          </td>\n          <td style=\"width: 50%;\">\n              <mat-form-field>\n                <input matInput [(ngModel)]=\"calendar.name\" name=\"name\" placeholder=\"Name\" required>\n              </mat-form-field>\n          </td>\n          <td>\n            <button class=\"btn btn-light\" (click)=\"cancelEdit()\">Cancel</button>\n            &nbsp;\n            <button class=\"btn btn-success\" (click)=\"saveEdit(calendar)\">Save</button>\n          </td>\n        </tr>        \n      </ng-template>      \n  </tbody>\n</table>\n</div>\n\n<br>\n<div [hidden]=\"newCalendarVisible\">\n  <button class=\"btn btn-default\" (click)=\"showNewCalendarCtrls()\" >\n      Add Calendar\n  </button>\n</div>\n\n<div [hidden]=\"!newCalendarVisible\">\n    <form>\n      <div class=\"row\">\n        <div class=\"col-md-2\">\n          <mat-form-field>\n            <input matInput [(ngModel)]=\"newCalendar.name\" name=\"name\" placeholder=\"Name\" required>\n          </mat-form-field>\n        </div>\n        <div class=\"col-md-1\">\n          <span>\n            <mat-placeholder>Color</mat-placeholder>\n            <button  mat-fab \n              style=\"width: 30px; height: 30px;\"\n              [(colorPicker)]=\"newCalendar.color\" \n              [style.background]=\"newCalendar.color\"></button>            \n          </span>\n        </div>        \n      </div>\n      <div class=\"button-row\">\n        <button mat-flat-button color=\"primary\" (click)=\"saveClick()\">Save</button>\n        <a mat-button (click)=\"cancelClick()\">Cancel</a>\n      </div>\n    </form>\n</div>"
+module.exports = "<br>\n<h2>Calendars</h2>\n<br>\n\n<ng-template #loading>\n  <div class=\"text-center\">\n    <i class=\"fa fa-spin fa-spinner fa-5x\"></i>\n    <br>\n    Loading...\n  </div>\n</ng-template>\n\n<div *ngIf=\"userProfile$ | async; else loading; let userProfile\">\n  <div *ngIf=\"calendars$ | async; else loading; let calendars\">\n    <table class=\"table table-sm\" style=\"width: 70%\">\n      <thead>\n        <th class=\"text-center\">Actions</th>\n        <th>Name</th>\n        <th class=\"text-center\">Subscribe</th>\n        <th class=\"text-center\">Color</th>\n        <th class=\"text-center\">Default</th>\n      </thead>\n      <tbody *ngFor=\"let calendar of calendars\">\n        <tr>\n          <ng-container *ngIf=\"editId != calendar._id; else elseTemplate\">\n            <!-- View Mode -->\n            <td class=\"text-center\">\n              <button class=\"btn btn-sm btn-light\" (click)=\"showEdit(calendar._id)\">\n                <mat-icon>edit</mat-icon>\n              </button>\n              &nbsp;\n              <button class=\"btn btn-sm btn-light\" (click)=\"delete(calendar._id)\">\n                <mat-icon>delete</mat-icon>\n              </button>\n            </td>\n            <td>\n              <h5>{{calendar.name}}</h5>\n            </td>\n          </ng-container>\n          <ng-template #elseTemplate>\n            <!-- Edit Mode -->\n            <td class=\"text-center\">\n              <button class=\"btn btn-light\" (click)=\"cancelEdit()\">Cancel</button>\n              &nbsp;\n              <button class=\"btn btn-success\" (click)=\"saveEdit(calendar)\">Save</button>\n            </td>\n            <td>\n              <mat-form-field>\n                <input matInput [(ngModel)]=\"calendar.name\" name=\"name\" required>\n              </mat-form-field>\n            </td>\n          </ng-template>\n          <td class=\"text-center\">\n              <mat-checkbox color=\"warn\" \n              [checked]=\"isSubscribedToCalendar(userProfile, calendar.name)\"\n              (change)=\"onSubscribeCheckChanged($event, userProfile, calendar)\"></mat-checkbox>\n          </td>\n          <td class=\"text-center\">\n            <button mat-fab \n              style=\"width: 30px; height: 30px;\"\n              *ngIf=\"isSubscribedToCalendar(userProfile, calendar.name)\"\n              (colorPicker)=\"getCalendarsColor(userProfile, calendar)\" \n              [style.background]=\"getCalendarsColor(userProfile, calendar)\" \n              (colorPickerChange)=\"onCalendarColorChanged($event, userProfile, calendar)\">\n            </button>\n          </td>\n          <td class=\"text-center\">\n              <mat-radio-button value=\"1\" \n                [checked]=\"isDefault(userProfile, calendar.name)\"\n                [disabled]=\"!isSubscribedToCalendar(userProfile, calendar.name)\"\n                (change)=\"onDefaultChanged($event, userProfile, calendar)\">\n              </mat-radio-button>\n          </td>\n        </tr>\n    </tbody>\n  </table>\n  </div>\n</div>\n\n<br>\n<div [hidden]=\"newCalendarVisible\">\n  <button mat-stroked-button color=\"primary\" (click)=\"showNewCalendarCtrls()\">Add Calendar</button>\n</div>\n\n<div [hidden]=\"!newCalendarVisible\">\n    <form>\n      <div class=\"row\">\n        <div class=\"col-md-2\">\n          <mat-form-field>\n            <input matInput [(ngModel)]=\"newCalendar.name\" name=\"name\" placeholder=\"Name\" required>\n          </mat-form-field>\n        </div>\n        <div class=\"col-md-1\">\n          <span>\n            <mat-placeholder>Color</mat-placeholder>\n            <button  mat-fab \n              style=\"width: 30px; height: 30px;\"\n              [(colorPicker)]=\"newCalendar.color\" \n              [style.background]=\"newCalendar.color\"></button>            \n          </span>\n        </div>        \n      </div>\n      <div class=\"button-row\">\n        <button mat-flat-button color=\"primary\" (click)=\"saveClick()\">Save</button>\n        <a mat-button (click)=\"cancelClick()\">Cancel</a>\n      </div>\n    </form>\n</div>"
 
 /***/ }),
 
@@ -780,6 +773,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _muega_models_Calendar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @muega-models/Calendar */ "./src/app/models/Calendar.ts");
 /* harmony import */ var _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @muega-services/calendar.service */ "./src/app/services/calendar.service.ts");
+/* harmony import */ var _muega_services_user_profile_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @muega-services/user-profile.service */ "./src/app/services/user-profile.service.ts");
+/* harmony import */ var _muega_models_UserCalendar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @muega-models/UserCalendar */ "./src/app/models/UserCalendar.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -794,13 +789,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var CalendarsComponent = /** @class */ (function () {
-    function CalendarsComponent(calendarService, iconRegistry, sanitizer) {
+    function CalendarsComponent(calendarService, userProfileService, iconRegistry, sanitizer) {
         this.calendarService = calendarService;
+        this.userProfileService = userProfileService;
         this.newCalendar = new _muega_models_Calendar__WEBPACK_IMPORTED_MODULE_3__["Calendar"]();
     }
     CalendarsComponent.prototype.ngOnInit = function () {
         this.loadCalendars();
+        this.userProfile$ = this.userProfileService.getProfile();
     };
     CalendarsComponent.prototype.loadCalendars = function () {
         this.calendars$ = this.calendarService.getCalendars();
@@ -848,6 +847,77 @@ var CalendarsComponent = /** @class */ (function () {
         });
         this.newCalendarVisible = false;
     };
+    CalendarsComponent.prototype.isSubscribedToCalendar = function (userProfile, calendarName) {
+        var index = this.findCalendar(userProfile.calendars, calendarName);
+        if (index > -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+    CalendarsComponent.prototype.isDefault = function (userProfile, calendarName) {
+        var index = this.findCalendar(userProfile.calendars, calendarName);
+        if (index > -1) {
+            console.log(userProfile.calendars[index].default);
+            return userProfile.calendars[index].default;
+        }
+        return false;
+    };
+    CalendarsComponent.prototype.getCalendarsColor = function (userProfile, calendar) {
+        var index = this.findCalendar(userProfile.calendars, calendar.name);
+        if (index > -1) {
+            return userProfile.calendars[index].color;
+        }
+        else {
+            // return calendar's color if not subscribed
+            return calendar.color;
+        }
+    };
+    CalendarsComponent.prototype.findCalendar = function (calendars, calendarName) {
+        for (var index = 0; index < calendars.length; index++) {
+            if (calendarName === calendars[index].name) {
+                return index;
+            }
+        }
+        return -1;
+    };
+    CalendarsComponent.prototype.onSubscribeCheckChanged = function (event, userProfile, calendar) {
+        if (event.checked) {
+            var userCalendar = new _muega_models_UserCalendar__WEBPACK_IMPORTED_MODULE_6__["UserCalendar"]();
+            userCalendar.name = calendar.name;
+            userCalendar.color = calendar.color;
+            userCalendar.default = false;
+            userProfile.calendars.push(userCalendar);
+        }
+        else {
+            var index = this.findCalendar(userProfile.calendars, calendar.name);
+            userProfile.calendars.splice(index, 1);
+        }
+        this.userProfileService.updateCalendars(userProfile.calendars)
+            .subscribe(function (res) {
+            console.log(res);
+        });
+    };
+    CalendarsComponent.prototype.onCalendarColorChanged = function (newColor, userProfile, calendar) {
+        var index = this.findCalendar(userProfile.calendars, calendar.name);
+        userProfile.calendars[index].color = newColor;
+        this.userProfileService.updateCalendars(userProfile.calendars)
+            .subscribe(function (res) {
+            console.log(res);
+        });
+    };
+    CalendarsComponent.prototype.onDefaultChanged = function (event, userProfile, calendar) {
+        var index = this.findCalendar(userProfile.calendars, calendar.name);
+        for (var i = 0; i < userProfile.calendars.length; i++) {
+            userProfile.calendars[i].default = false;
+        }
+        userProfile.calendars[index].default = event.source._checked;
+        this.userProfileService.updateCalendars(userProfile.calendars)
+            .subscribe(function (res) {
+            console.log(res);
+        });
+    };
     CalendarsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-calendars',
@@ -856,6 +926,7 @@ var CalendarsComponent = /** @class */ (function () {
             providers: [_muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_4__["CalendarService"]]
         }),
         __metadata("design:paramtypes", [_muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_4__["CalendarService"],
+            _muega_services_user_profile_service__WEBPACK_IMPORTED_MODULE_5__["UserProfileService"],
             _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatIconRegistry"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["DomSanitizer"]])
     ], CalendarsComponent);
     return CalendarsComponent;
@@ -979,8 +1050,8 @@ module.exports = "<div class=\"container\">\n\n  <div class=\"row\">\n    \n    
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginComponent", function() { return LoginComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _muega_services_authentication_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @muega-services/authentication.service */ "./src/app/services/authentication.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _muega_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @muega-services/authentication.service */ "./src/app/services/authentication.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1005,7 +1076,7 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.login = function () {
         var _this = this;
         this.auth.login(this.credentials).subscribe(function () {
-            _this.router.navigateByUrl('/profile');
+            _this.router.navigateByUrl('/');
         }, function (err) {
             console.error(err);
         });
@@ -1022,7 +1093,7 @@ var LoginComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/components/user/login/login.component.html")
         }),
-        __metadata("design:paramtypes", [_muega_services_authentication_service__WEBPACK_IMPORTED_MODULE_1__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_muega_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1038,7 +1109,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    \n    <div class=\"col-md-6\">\n\n      <h2 class=\"form-signin-heading\">Your profile</h2>\n      <br/>\n\n      <ng-template #loading>\n        <div class=\"text-center\">\n          <i class=\"fa fa-spin fa-spinner fa-5x\"></i>\n          <br>\n          Loading...\n        </div>\n      </ng-template>\n      \n      <div *ngIf=\"user$ | async; else loading; let user\">\n        <form>\n          <div class=\"form-group\">\n            <label for=\"name\">Full name</label>\n            <input type=\"text\" class=\"form-control\" name=\"name\" [(ngModel)]=\"user.name\" placeholder=\"Enter your name\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"email\">Email</label>\n            <input type=\"text\" class=\"form-control\" name=\"email\" [(ngModel)]=\"user.email\" placeholder=\"Enter your email\">\n          </div>\n\n          <button type=\"submit\" class=\"btn btn-primary\">Update</button>\n        </form>\n      </div>\n\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    \n    <div class=\"col-md-6\">\n\n      <br/>\n      <h2 class=\"form-signin-heading\">Your profile</h2>\n      <br/>\n\n      <p *ngIf=\"alert\">\n        <ngb-alert type=\"success\" (close)=\"closeAlert()\">{{ alert }}</ngb-alert>\n      </p>\n\n      <ng-template #loading>\n        <div class=\"text-center\">\n          <i class=\"fa fa-spin fa-spinner fa-5x\"></i>\n          <br>\n          Loading...\n        </div>\n      </ng-template>\n      \n      <div *ngIf=\"user$ | async; else loading; let user\">\n        <form>\n          <div class=\"form-group\">\n            <label for=\"name\">Full name</label>\n            <input type=\"text\" class=\"form-control\" name=\"name\" [(ngModel)]=\"user.name\" placeholder=\"Enter your name\">\n          </div>\n          <div class=\"form-group\">\n            <label for=\"email\">Email</label>\n            <input type=\"text\" class=\"form-control\" name=\"email\" [(ngModel)]=\"user.email\" placeholder=\"Enter your email\">\n          </div>\n\n          <button type=\"submit\" mat-stroked-button color=\"primary\" (click)=\"updateProfile(user)\">Update</button>\n        </form>\n      </div>\n\n    </div>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1072,11 +1143,17 @@ var ProfileComponent = /** @class */ (function () {
     // tslint:disable-next-line:use-life-cycle-interface
     ProfileComponent.prototype.ngOnInit = function () {
         this.user$ = this.userProfileSvc.getProfile();
-        // .subscribe(user => {
-        //   this.details$ = user;
-        // }, (err) => {
-        //   console.error(err);
-        // });
+    };
+    ProfileComponent.prototype.updateProfile = function (user) {
+        var _this = this;
+        this.alert = null;
+        this.userProfileSvc.updateProfile(user)
+            .subscribe(function (res) {
+            _this.alert = 'Your profile has been updated.';
+        });
+    };
+    ProfileComponent.prototype.closeAlert = function () {
+        this.alert = null;
     };
     ProfileComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1170,8 +1247,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MaterialModule", function() { return MaterialModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _mat_datetimepicker_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mat-datetimepicker/core */ "./node_modules/@mat-datetimepicker/core/@mat-datetimepicker/core.es5.js");
-/* harmony import */ var _mat_datetimepicker_moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mat-datetimepicker/moment */ "./node_modules/@mat-datetimepicker/moment/@mat-datetimepicker/moment.es5.js");
+/* harmony import */ var _mat_datetimepicker_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mat-datetimepicker/core */ "./node_modules/@mat-datetimepicker/core/fesm5/mat-datetimepicker-core.js");
+/* harmony import */ var _mat_datetimepicker_moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mat-datetimepicker/moment */ "./node_modules/@mat-datetimepicker/moment/fesm5/mat-datetimepicker-moment.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1198,10 +1275,9 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatOptionModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDatepickerModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],
                 _mat_datetimepicker_core__WEBPACK_IMPORTED_MODULE_2__["MatDatetimepickerModule"],
-                //use this if you want to use native javascript dates and INTL API if available
-                //MatNativeDatetimeModule,
-                _mat_datetimepicker_moment__WEBPACK_IMPORTED_MODULE_3__["MatMomentDatetimeModule"],
+                _mat_datetimepicker_moment__WEBPACK_IMPORTED_MODULE_3__["MatMomentDatetimeModule"]
             ],
             exports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatFormFieldModule"],
@@ -1214,6 +1290,7 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatOptionModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatDatepickerModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatCheckboxModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_1__["MatRadioModule"],
                 _mat_datetimepicker_core__WEBPACK_IMPORTED_MODULE_2__["MatDatetimepickerModule"],
                 _mat_datetimepicker_moment__WEBPACK_IMPORTED_MODULE_3__["MatMomentDatetimeModule"]
             ]
@@ -1240,6 +1317,26 @@ var Calendar = /** @class */ (function () {
     function Calendar() {
     }
     return Calendar;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/models/UserCalendar.ts":
+/*!****************************************!*\
+  !*** ./src/app/models/UserCalendar.ts ***!
+  \****************************************/
+/*! exports provided: UserCalendar */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserCalendar", function() { return UserCalendar; });
+var UserCalendar = /** @class */ (function () {
+    function UserCalendar() {
+    }
+    return UserCalendar;
 }());
 
 
@@ -1635,6 +1732,15 @@ var UserProfileService = /** @class */ (function () {
     UserProfileService.prototype.getProfile = function () {
         return this.httpClient.get(this.domain + "/api/profile");
     };
+    UserProfileService.prototype.updateProfile = function (user) {
+        return this.httpClient.post(this.domain + "/api/profile", user);
+    };
+    UserProfileService.prototype.updateCalendars = function (calendars) {
+        return this.httpClient.post(this.domain + "/api/profile/calendars", calendars);
+    };
+    UserProfileService.prototype.resetPassword = function (newPassword) {
+        return this.httpClient.post(this.domain + "/api/profile/calendars", { password: newPassword });
+    };
     UserProfileService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -1730,7 +1836,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/juliocruz/Projects/Muegathon/muega-planner/src/client/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/kaszy86/muegathon/Muegaplanner/src/client/src/main.ts */"./src/main.ts");
 
 
 /***/ })

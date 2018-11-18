@@ -125,7 +125,7 @@ module.exports = ".edit-component {\n    display: flex;\n    flex-direction: col
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>{{ event._id != null ? 'Edit' : 'Add'}} Event</h2>\n<hr/>\n<form>\n  <div class=\"edit-component\">\n    <mat-form-field>\n      <input matInput [(ngModel)]=\"event.name\" name=\"name\" placeholder=\"Title\" required>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-placeholder>Event starts at...</mat-placeholder>\n      <mat-datetimepicker-toggle [for]=\"startDatetimePicker\" matSuffix></mat-datetimepicker-toggle>\n      <mat-datetimepicker #startDatetimePicker type=\"datetime\" openOnFocus=\"true\" timeInterval=\"5\"></mat-datetimepicker>\n      <input matInput [(ngModel)]=\"event.startDateTime\" name=\"startDateTime\" [matDatetimepicker]=\"startDatetimePicker\" required autocomplete=\"false\">\n    </mat-form-field>\n    <mat-form-field>\n      <mat-placeholder>Event ends at...</mat-placeholder>\n      <mat-datetimepicker-toggle [for]=\"endDatetimePicker\" matSuffix></mat-datetimepicker-toggle>\n      <mat-datetimepicker #endDatetimePicker type=\"datetime\" openOnFocus=\"true\" timeInterval=\"5\"></mat-datetimepicker>\n      <input matInput [(ngModel)]=\"event.endDateTime\" name=\"endDateTime\" [matDatetimepicker]=\"endDatetimePicker\" required autocomplete=\"false\">\n    </mat-form-field>\n    <mat-form-field>\n      <input matInput [(ngModel)]=\"event.location\" name=\"location\" placeholder=\"Location\">\n    </mat-form-field>\n    <mat-form-field>\n      <textarea matInput [(ngModel)]=\"event.notes\" name=\"notes\" placeholder=\"Notes\"></textarea>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-select [(ngModel)]=\"event.calendar\" name=\"calendar\" placeholder=\"Calendar\" required>\n        <mat-option *ngFor=\"let calendar of calendars\" [value]=\"calendar.name\">\n          {{calendar.name}}\n        </mat-option>\n      </mat-select>\n    </mat-form-field>\n    <div class=\"button-row\">\n      <button mat-stroked-button color=\"primary\" (click)=\"save()\">Save</button>\n      <button mat-button color=\"primary\" (click)=\"cancel()\">Cancel</button>\n    </div>\n  </div>\n</form>"
+module.exports = "<h2>{{ event._id != null ? 'Edit' : 'Add'}} Event</h2>\n<hr/>\n<form *ngIf=\"form\" [formGroup]=\"form\" (ngSubmit)=\"save()\">\n  <div class=\"edit-component\">\n    <mat-form-field>\n      <input matInput formControlName=\"name\" type=\"text\" placeholder=\"Title\">\n      <mat-error *ngIf=\"name.errors?.required\">required</mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-placeholder>Event starts at...</mat-placeholder>\n      <mat-datetimepicker-toggle [for]=\"startDatetimePicker\" matSuffix></mat-datetimepicker-toggle>\n      <mat-datetimepicker #startDatetimePicker type=\"datetime\" startView=\"month\" openOnFocus=\"true\" timeInterval=\"5\"></mat-datetimepicker>\n      <input matInput formControlName=\"startDate\" [matDatetimepicker]=\"startDatetimePicker\" autocomplete=\"false\">\n      <mat-error *ngIf=\"startDate.errors?.required\">required</mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-placeholder>Event ends at...</mat-placeholder>\n      <mat-datetimepicker-toggle [for]=\"endDatetimePicker\" matSuffix></mat-datetimepicker-toggle>\n      <mat-datetimepicker #endDatetimePicker type=\"datetime\" openOnFocus=\"true\" timeInterval=\"5\"></mat-datetimepicker>\n      <input matInput formControlName=\"endDate\" [matDatetimepicker]=\"endDatetimePicker\" autocomplete=\"false\">\n      <mat-error *ngIf=\"endDate.errors?.required\">required</mat-error>\n      <mat-error *ngIf=\"form.errors\">{{ form.errors?.dates | json }}</mat-error>\n    </mat-form-field>\n    <mat-form-field>\n      <input matInput formControlName=\"location\" placeholder=\"Location\">\n    </mat-form-field>\n    <mat-form-field>\n      <textarea matInput formControlName=\"notes\" placeholder=\"Notes\"></textarea>\n    </mat-form-field>\n    <mat-form-field>\n      <mat-select formControlName=\"calendar\" placeholder=\"Calendar\">\n        <mat-option *ngFor=\"let calendar of calendars\" [value]=\"calendar.name\">\n          {{calendar.name}}\n        </mat-option>\n      </mat-select>\n      <mat-error *ngIf=\"calendar.errors?.required\">required</mat-error>\n    </mat-form-field>\n    <div class=\"button-row\">\n      <button type=\"submit\" mat-stroked-button color=\"primary\">Save</button>\n      <button mat-button color=\"primary\" (click)=\"cancel()\">Cancel</button>\n    </div>\n  </div>\n</form>\n"
 
 /***/ }),
 
@@ -140,11 +140,12 @@ module.exports = "<h2>{{ event._id != null ? 'Edit' : 'Add'}} Event</h2>\n<hr/>\
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditComponent", function() { return EditComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @muega-services/calendar.service */ "./src/app/services/calendar.service.ts");
-/* harmony import */ var _muega_services_event_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @muega-services/event.service */ "./src/app/services/event.service.ts");
-/* harmony import */ var _muega_components_calendar_select_date_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @muega-components/calendar/select-date.service */ "./src/app/components/calendar/select-date.service.ts");
-/* harmony import */ var _muega_models_Event__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @muega-models/Event */ "./src/app/models/Event.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @muega-services/calendar.service */ "./src/app/services/calendar.service.ts");
+/* harmony import */ var _muega_services_event_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @muega-services/event.service */ "./src/app/services/event.service.ts");
+/* harmony import */ var _muega_components_calendar_select_date_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @muega-components/calendar/select-date.service */ "./src/app/components/calendar/select-date.service.ts");
+/* harmony import */ var _muega_models_Event__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @muega-models/Event */ "./src/app/models/Event.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -154,6 +155,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -178,17 +180,40 @@ var EditComponent = /** @class */ (function () {
                 _this.event = event;
                 _this.ref.markForCheck();
                 console.log(_this.event);
+                _this.initForm();
             });
         }
         else {
-            this.event = new _muega_models_Event__WEBPACK_IMPORTED_MODULE_5__["Event"]();
+            this.event = new _muega_models_Event__WEBPACK_IMPORTED_MODULE_6__["Event"]();
+            this.initForm();
         }
         this.calendarService.getCalendars()
             .subscribe(function (calendars) {
             _this.calendars = calendars;
         });
     };
+    EditComponent.prototype.initForm = function () {
+        this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
+            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](this.event.name, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
+            startDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](this.event.startDateTime, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
+            endDate: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](this.event.endDateTime, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]),
+            location: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](this.event.location),
+            notes: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](this.event.notes),
+            calendar: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](this.event.calendar, [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required])
+        }, { validators: this.validateEndDate() });
+    };
+    EditComponent.prototype.validateEndDate = function () {
+        return function (group) {
+            if (group.controls['startDate'].value > group.controls['endDate'].value) {
+                return {
+                    dates: "end date cannot be before start date"
+                };
+            }
+            return {};
+        };
+    };
     EditComponent.prototype.save = function () {
+        console.warn(this.form.value);
         if (this.event._id != null) {
             this.eventService.updateEvent(this.event)
                 .subscribe(function (res) {
@@ -205,19 +230,61 @@ var EditComponent = /** @class */ (function () {
     EditComponent.prototype.cancel = function () {
         this.router.navigate(['/']);
     };
+    Object.defineProperty(EditComponent.prototype, "name", {
+        get: function () {
+            return this.form.get("name");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditComponent.prototype, "startDate", {
+        get: function () {
+            return this.form.get("startDate");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditComponent.prototype, "endDate", {
+        get: function () {
+            return this.form.get("endDate");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditComponent.prototype, "location", {
+        get: function () {
+            return this.form.get("location");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditComponent.prototype, "notes", {
+        get: function () {
+            return this.form.get("notes");
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EditComponent.prototype, "calendar", {
+        get: function () {
+            return this.form.get("calendar");
+        },
+        enumerable: true,
+        configurable: true
+    });
     EditComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-edit',
             changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
             template: __webpack_require__(/*! ./edit.component.html */ "./src/app/components/events/edit/edit.component.html"),
             styles: [__webpack_require__(/*! ./edit.component.css */ "./src/app/components/events/edit/edit.component.css")],
-            providers: [_muega_services_event_service__WEBPACK_IMPORTED_MODULE_3__["EventService"], _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_2__["CalendarService"]]
+            providers: [_muega_services_event_service__WEBPACK_IMPORTED_MODULE_4__["EventService"], _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_3__["CalendarService"]]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _muega_components_calendar_select_date_service__WEBPACK_IMPORTED_MODULE_4__["SelectDateService"],
-            _muega_services_event_service__WEBPACK_IMPORTED_MODULE_3__["EventService"],
-            _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_2__["CalendarService"],
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _muega_components_calendar_select_date_service__WEBPACK_IMPORTED_MODULE_5__["SelectDateService"],
+            _muega_services_event_service__WEBPACK_IMPORTED_MODULE_4__["EventService"],
+            _muega_services_calendar_service__WEBPACK_IMPORTED_MODULE_3__["CalendarService"],
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]])
     ], EditComponent);
     return EditComponent;
