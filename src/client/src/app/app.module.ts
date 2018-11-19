@@ -21,6 +21,7 @@ import { AuthenticationService } from '@muega-services/authentication.service';
 import { CalendarCtrlComponent } from '@muega-components/calendar/calendar-ctrl/calendar-ctrl.component';
 import { AuthGuardService } from '@muega-services/auth-guard.service';
 import { AuthInterceptor } from '@muega-services/auth-interceptor';
+import { WeatherWidgetComponent } from '@muega-components/weather-widget/weather-widget.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,7 +48,8 @@ const routes: Routes = [
     RegisterComponent,
     ProfileComponent,
     LoginComponent,
-    CalendarsComponent
+    CalendarsComponent,
+    WeatherWidgetComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     ColorPickerModule
   ],
-  exports: [ MaterialModule, CommonModule, BrowserAnimationsModule ],
+  exports: [ MaterialModule, CommonModule, BrowserAnimationsModule, WeatherWidgetComponent ],
   providers: [
     AuthenticationService,
     AuthGuardService,
