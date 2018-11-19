@@ -1,9 +1,9 @@
+const config = require('../config');
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb://localhost/muega-calendar-db';
-if (process.env.NODE_ENV === 'production') {
-  dbURI = process.env.MONGOLAB_URI;
-}
+
+const { db: { host, port, name } } = config;
+var dbURI = `mongodb://${host}:${port}/${name}`;
 
 mongoose.connect(dbURI);
 
@@ -46,4 +46,5 @@ process.on('SIGTERM', function() {
 });
 
 // BRING IN YOUR SCHEMAS & MODELS
-//require('./users');
+require('../models/user');
+require('../models/subscriber');

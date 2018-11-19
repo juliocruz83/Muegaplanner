@@ -1,11 +1,11 @@
+const config = require('./api/config');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
 
 require('./api/models/db');
-require('./api/models/user');
-require('./api/models/subscriber');
+
 // Get the Passport config after model is defined
 require('./api/config/passport');
 
@@ -13,10 +13,11 @@ const routesApi = require('./api/routes/index');
 const subscribersRoutes = require('./api/routes/subscribers');
 const calendarsRoutes = require('./api/routes/calendar');
 const eventsRoutes = require('./api/routes/event');
+const weatherRoutes = require('./api/routes/weather');
 
 const app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', config.app.port);
 
 //middlewares
 app.use(cors());
@@ -29,6 +30,7 @@ app.use('/api', routesApi);
 app.use('/api', subscribersRoutes);
 app.use('/api', calendarsRoutes);
 app.use('/api', eventsRoutes);
+app.use('/api', weatherRoutes);
 
 //static files
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -74,7 +76,7 @@ app.use(function(err, req, res, next) {
 
 //start server
 app.listen(app.get('port'), () => {
-    console.log('server on port 3000');
+    console.log('server on port ' + config.app.port);
 })
 
 //module.exports = app;
