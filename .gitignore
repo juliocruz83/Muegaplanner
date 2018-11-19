@@ -1,2 +1,4 @@
 # Dotenv files for environment configurations
 .env
+
+.vscode
